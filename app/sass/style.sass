@@ -1,0 +1,866 @@
+//FOR MEDIA QUERIES
+
+$wide-desktop-width: 1920px
+$low-desktop-width: 1600px
+$pr-low-desktop-width: 1280px
+$pr-laptop-landscape-width: 1150px
+$laptop-landscape-width: 1024px
+$laptop-width: 768px
+$middle-mobile: 660px
+$mobile-width: 320px
+
+
+@mixin wide-desktop
+  @media screen and (min-width: #{$wide-desktop-width})
+    @content
+
+@mixin low-desktop
+  @media screen and (max-width: #{$low-desktop-width})
+    @content
+
+@mixin pre-low-desktop
+  @media screen and (max-width: #{$pr-low-desktop-width})
+    @content
+
+@mixin pre-portrait-tablet
+  @media screen and (min-width: #{$laptop-landscape-width}) and (max-width: #{$pr-laptop-landscape-width})
+    @content
+
+@mixin portrait-tablet
+  @media screen and (min-width: #{$middle-mobile}) and (max-width: #{$laptop-width - 1px})
+    @content
+
+@mixin landscape-tablet
+  @media screen and (max-width: #{$laptop-landscape-width - 1px})
+    @content
+
+@mixin pre-mobile
+  @media (min-width: #{$middle-mobile}) and (max-width: #{$laptop-width - 1px})
+    @content
+
+@mixin mobile
+  @media (min-width: #{$mobile-width}) and (max-width: #{$middle-mobile - 1px})
+    @content
+
+
+//BASE COLORS
+$dark-blue: #13243c
+$cyan: #30b6ce
+$base-bg: #f9fcff
+
+$primary-font-color: #1b1d1e
+$lighten-font-color: #848687
+$accent-font-color: #35bef7
+
+//GRADIENTS
+$main-gradient: linear-gradient(to right, rgb(76, 224, 144), rgb(72, 217, 81)), linear-gradient(rgb(71, 214, 117), rgb(71, 214, 117))
+
+//SHADOWS
+$green-shadow: 0px 5px 20px 0 rgba(0, 231, 22, 0.4)
+
+//BASE FONTS
+$open-sans: 'Open Sans', sans-serif
+$montserrat: 'Montserrat', sans-serif
+
+
+
+//SIMPLE GRID
+.col-2
+  float: left
+  width: 20%
+.col-3
+  float: left
+  width: 25%
+.col-4
+  float: left
+  width: 33%
+.col-6
+  float: left
+  width: 50%
+.col-12
+  float: left
+  width: 100%
+
+.wide-wrapper
+  display: flex
+  flex-shrink: 0
+  flex-grow: 0
+  flex-wrap: wrap
+  position: relative
+  width: 83.177%
+  margin: 0 auto
+  @include low-desktop
+    width: 91.328%
+  @include portrait-tablet
+    width: 100%
+  @include mobile
+    width: 100%
+
+.thin-wrapper
+  position: relative
+  width: 68.75%
+  margin: 0 auto
+  @include low-desktop
+    width: 91.328%
+
+
+.inner-wrapper
+  position: relative
+  width: 82.342%
+  margin: 0 auto
+  @include low-desktop
+    width: 100%
+
+.hamburger
+  display: none
+  padding: 21px 24px 21px 0
+  @media screen and (max-width: #{$laptop-width})
+    display: block
+    &-box
+      width: 35px
+      height: 27px
+  @include mobile
+    &-box
+      width: 30px
+      height: 22px
+.hamburger-inner,
+.hamburger-inner::before,
+.hamburger-inner::after
+  background-color: #FFF
+  width: 35px
+  @include mobile
+    width: 30px
+
+h1,
+.h1-like
+  font-size: 48px
+  font-weight: normal
+
+h2,
+.h2-like
+  font-size: 24px
+  letter-spacing: .5px
+  font-weight: 600
+  @include mobile
+    font-size: 22px
+
+.base-p
+  font-size: 18px
+  letter-spacing: 0.4px
+  line-height: 26px
+  margin: 16px 0
+
+.clear
+  clear: both
+.left
+  float: left
+.right
+  float: right
+.centered-text
+  text-align: center
+
+.base-font
+  font: 14px $open-sans
+
+.white-text
+  color: #FFF
+
+.opened
+  &:after
+    content: ''
+    position: absolute
+    right: 1px
+    top: 25px
+    background-image: url(../../images/arrow.png)
+    width: 13px
+    height: 8px
+    transition: .3s
+.closed
+  &:after
+    content: ''
+    position: absolute
+    right: 1px
+    top: 25px
+    background-image: url(../../images/arrow_2.png)
+    width: 13px
+    height: 8px
+
+.opened-v--blue
+  &:after
+    content: ''
+    position: absolute
+    right: 1px
+    top: 4px
+    background: url(../../images/arrow-top.png) no-repeat
+    background-size: contain
+    width: 16px
+    height: 12px
+    transition: .3s
+.closed-v--blue
+  &:after
+    content: ''
+    position: absolute
+    right: 1px
+    top: 4px
+    background: url(../../images/arrow-down.png) no-repeat
+    background-size: contain
+    width: 16px
+    height: 12px
+
+
+// CUSTOM STYLES
+body
+  @extend .base-font
+  background-color: #f9fcff
+  color: $primary-font-color
+  overflow-x: hidden
+.wrapper
+  position: relative
+  width: 100%
+
+header
+  position: relative
+  background-color: $dark-blue
+  width: 100%
+  height: 72px
+
+
+.logo
+  position: absolute
+  background-size: contain
+  background: url(../../images/logo.png) no-repeat
+  height: 39px
+  width: 214px
+  left: 32px
+  top: 17px
+  padding-left: 52px
+  padding-top: 2px
+  @include mobile
+    padding-left: 42px
+  a
+    display: block
+    height: 39px
+    font-size: 21px
+    font-weight: 700
+    text-transform: uppercase
+    color: #FFF
+    text-decoration: none
+    line-height: 22px
+
+  .logo--sm
+    display: block
+    text-transform: capitalize
+    color: $lighten-font-color
+    font-size: 11px
+    font-weight: 300
+  @media screen and (max-width: 400px)
+    left: 12px
+.main-nav
+  display: block
+  @media screen and (max-width: #{$laptop-width})
+    display: none
+    position: absolute
+    right: 0
+    top: 72px
+    width: 100%
+    z-index: 2
+    background-color: rgba(19, 36, 60,.93)
+  li
+    float: left
+    list-style: none
+    margin: 27px 20px 26px
+    a
+      display: block
+      text-transform: uppercase
+      text-decoration: none
+      letter-spacing: 0.8px
+      color: #FFF
+      font-size: 14px
+      font-weight: 600
+      &:hover
+        opacity: .8
+      @media screen and (max-width: #{$laptop-width})
+        line-height: 59px
+    &:nth-child(3)
+      margin-right: 31px
+      @media screen and (max-width: #{$laptop-width})
+        margin-right: 0
+    @media screen and (max-width: #{$laptop-width})
+      float: none
+      text-align: center
+      padding: 0
+      margin: 0
+      box-sizing: border-box
+      &:hover
+        background-color: rgba(19, 36, 60,.99)
+.head-info
+  box-sizing: border-box
+  height: 250px
+  position: relative
+  text-align: center
+  padding-top: 70px
+  color: #FFF
+  @include low-desktop
+    padding-top: 49px
+  @include landscape-tablet
+    height: 320px
+    padding-top: 70px
+  @media only screen and (max-width: 855px)
+    padding-top: 42px
+  .h1-like
+    font-weight: bold
+    margin: 0 27px 16px
+    position: relative
+    @include landscape-tablet
+      line-height: 52px
+    @include mobile
+      margin: 0 12px 12px
+      line-height: 38px
+      font-size: 32px
+
+  &::before
+    content: ''
+    position: absolute
+    background: url(../../images/charts.png) no-repeat
+    background-size: cover
+    width: 100%
+    height: 249px
+    top: 0
+    left: 0
+  @include wide-desktop
+    &::before
+      background-size: cover
+  @include landscape-tablet
+    &::before
+      height: 320px
+      //background-size: cover
+
+.head-p
+  font-weight: 600
+  position: relative
+  @include low-desktop
+    margin: 16px 54px
+  &.base-p
+    @include portrait-tablet
+      line-height: 22px
+  @include mobile
+    font-size: 14px
+    line-height: 20px
+    margin: 10px
+main
+  position: relative
+  float: left
+  width: 74.25%
+  margin-top: 41px
+  margin-right: 32px
+  background-color: #FFF
+  border: solid 1px #dfdfdf
+  @include low-desktop
+    width: 100%
+    margin-right: 0
+
+.disclaimer
+  font-size: 13px
+  position: absolute
+  text-decoration: underline
+  color: #262829
+  right: 0
+  top: -28px
+  &:hover
+    cursor: pointer
+
+// table
+.table
+  position: relative
+.table-head-row
+  align-items: center
+  display: flex
+  border-bottom: 1px solid #dfdfdf
+  height: 61px
+  font-weight: 700
+  letter-spacing: 1.4px
+  text-transform: uppercase
+  @include landscape-tablet
+    display: none
+  .td
+    float: left
+    text-align: left
+    &:nth-child(1)
+      margin-left: 13.71%
+      width: 15.8%
+    &:nth-child(2)
+      width: 13.43%
+    &:nth-child(3)
+      width: 23.60%
+.editors-pick__mark
+  background: url(../../images/editor-pick.png) no-repeat
+  background-size: 100%
+  display: none
+  position: absolute
+  top: 12px
+  left: -11px
+  width: 130px
+  height: 39px
+  @include wide-desktop
+    display: block
+.table-row
+  display: flex
+  align-items: center
+  position: relative
+  width: 100%
+  height: 213px
+  border-bottom: 1px solid #dfdfdf
+  //&:first-child
+  //  &:before
+  //    content: ''
+  //    @extend .editors-pick__mark
+  @include landscape-tablet
+    min-height: 256px
+    flex-wrap: wrap
+    padding-bottom: 20px
+    &:nth-child(odd)
+      background-color: #f8fcff
+    &:last-child
+      margin-bottom: 64px
+  @include mobile
+    height: inherit
+    &:last-child
+      margin-bottom: 0
+
+.td
+  float: left
+  text-align: center
+.hidden-name
+  color: rgb(131, 135, 148)
+  display: none
+  font-size: 13px
+  letter-spacing: .3px
+  font-weight: 400
+  line-height: normal
+  @include landscape-tablet
+    display: block
+.hidden-name__price
+  text-align: left
+  margin-left: 20%
+  @include mobile
+    margin-left: 40%
+.num
+  width: 8.326%
+  color: #848687
+  font-size: 24px
+  transition: .1s
+  @include pre-portrait-tablet
+    width: 5.326%
+  @include landscape-tablet
+    width: 36px
+    height: 36px
+    background-color: rgb(237, 241, 244)
+    position: absolute
+  @include mobile
+    display: none
+.site
+  position: relative
+  width: 16.14%
+  transition: .1s
+  @include pre-portrait-tablet
+    width: 19.14%
+  @include landscape-tablet
+    margin: 30px 0 30px 36px
+    width: 25%
+  @include pre-mobile
+    width: 32%
+  @include mobile
+    flex-basis: 60%
+    margin-left: 0
+    margin-bottom: 24px
+.site__logo
+  background-repeat: no-repeat
+  background-size: 191px
+.site__rating
+  @include mobile
+    display: inline-block
+    margin-top: 22px
+    margin-left: 50%
+    margin-right: 20px
+  @media only screen and (max-width: 435px)
+    margin-left: 28% !important
+    margin-right: 25px
+
+.site__reviews
+  font-size: 12px
+  letter-spacing: 0.5px
+  text-transform: uppercase
+  color: $lighten-font-color
+  @include mobile
+    position: absolute
+    bottom: 4px
+    right: -60px
+  @media only screen and (max-width: 480px)
+    right: -70px
+.jq-star
+  padding-right: 3px
+.score
+  width: 15.55%
+  @include pre-portrait-tablet
+    width: 13.55%
+  @include landscape-tablet
+    width: 18%
+    align-self: flex-start
+    margin-top: 38px
+  @media only screen and (max-width: 855px)
+    width: 16%
+  @include pre-mobile
+    width: 10%
+  @include mobile
+    flex-basis: 40%
+    margin-top: 33px
+.score__value
+  font-size: 40px
+  font-weight: 700
+  line-height: 41.5px
+.score__review
+  font-size: 11px
+  letter-spacing: 0.4px
+  text-transform: uppercase
+  color: $accent-font-color
+  &:hover
+    cursor: pointer
+.description
+  width: 27.037%
+  text-align: left
+  @include landscape-tablet
+    flex-basis: 100%
+    order: 1
+
+.hide-description__btn
+  display: none
+  position: relative
+  text-align: center
+  font-size: 14px
+  letter-spacing: .8px
+  color: $accent-font-color
+  font-family: $montserrat
+  text-transform: uppercase
+  width: 160px
+  margin: 0 auto 20px
+  @include mobile
+    display: block
+  &:hover
+    cursor: pointer
+.score-list
+  list-style: square
+  @include landscape-tablet
+    display: flex
+    flex-wrap: wrap
+  @include mobile
+    display: none
+  li
+    font-size: 15px
+    letter-spacing: 0.3px
+    margin-bottom: 11px
+    margin-left: 55px
+    @include pre-mobile
+      margin-left: 50px
+    @include landscape-tablet
+      flex-basis: 42%
+    @include mobile
+      flex-basis: 100%
+      margin-left: 19%
+      margin-right: 14%
+.price
+  width: 12.66%
+  font-size: 30px
+  font-weight: 700
+  letter-spacing: 0.6px
+  @include landscape-tablet
+    width: 27%
+    align-self: flex-start
+    margin-top: 38px
+  @include pre-mobile
+    width: 22%
+  @include mobile
+    flex-basis: 100%
+    margin-top: 0
+.month-sup
+  font-size: 14px
+  color: $lighten-font-color
+  @include pre-mobile
+    display: none
+
+.button-wpr
+  width: 22.287%
+  position: relative
+  display: flex
+  flex-wrap: wrap
+  flex-shrink: 0
+  justify-content: center
+  @include pre-portrait-tablet
+    width: 23.287%
+  @include pre-mobile
+    width: 29%
+  @include mobile
+    flex-basis: 100%
+    flex-direction: column
+  .note--free
+    position: relative
+    font-size: 13px
+    letter-spacing: 0.5px
+    text-transform: uppercase
+    color: $lighten-font-color
+    margin-top: -20px
+    margin-bottom: 12px
+    @include landscape-tablet
+      margin-top: 16px
+      margin-bottom: 0
+      align-self: center
+      order: 1
+    @include mobile
+      order: 0
+      margin-bottom: 12px
+.visit-button
+  box-sizing: border-box
+  position: relative
+  display: inline-block
+  font-size: 18px
+  color: #FFF
+  height: 56px
+  line-height: 54px
+  letter-spacing: 1.1px
+  padding: 0 41px 0 46px
+  border-radius: 6px
+  background-image: $main-gradient
+  box-shadow: $green-shadow
+  text-decoration: none
+  text-transform: uppercase
+  font-weight: 600
+  flex-shrink: 0
+  flex-grow: 0
+  @include mobile
+    width: 296px
+    margin: 0 auto 26px
+  &:hover
+    opacity: .9
+  &:after
+    content: '›'
+    height: 13px
+    width: 8px
+    font-size: 24px
+    position: relative
+    padding-left: 10px
+    color: #FFF
+
+.side-block
+  float: left
+  width: calc(100% - 74.44% - 32px)
+  @include low-desktop
+    display: flex
+    float: none
+    clear: both
+    width: 100%
+    padding: 0 85px
+    box-sizing: border-box
+    justify-content: space-around
+    order: 1
+  @include pre-low-desktop
+    padding: 0
+  @include mobile
+    background-color: #FFF
+  @media screen and (max-width: 1090px)
+    flex-wrap: wrap
+
+  aside
+    background-color: #FFF
+    border: solid 1px #dfdfdf
+    box-sizing: border-box
+    margin-top: 41px
+    padding: 0 23px
+    width: 100%
+    @include low-desktop
+      width: 470px
+      min-height: 335px
+      margin-top: 0
+      margin-bottom: 64px
+    @include landscape-tablet
+      margin-bottom: 50px
+    @include mobile
+      width: 100%
+      &:nth-child(1)
+        margin-bottom: 34px
+        border-top: none
+      &:nth-child(2)
+        border-top: none
+        margin-bottom: 0
+
+
+
+.how-score
+  @include low-desktop
+    min-height: 335px
+.aside__title
+  font-size: 17px
+  font-weight: 700
+  padding: 19px 0
+  text-transform: uppercase
+  color: $accent-font-color
+  border-bottom: solid 1px #dfdfdf
+
+.aside__item
+  border-bottom: solid 1px #dfdfdf
+  &:last-child
+    border: none
+  &:hover
+    cursor: pointer
+
+.aside-item__name
+  position: relative
+  font-size: 16px
+  font-weight: 600
+  letter-spacing: 0.3px
+  padding: 16px 0
+
+.aside-item__text
+  display: none
+  font-size: 15px
+  letter-spacing: 0.3px
+  line-height: 22px
+  color: $lighten-font-color
+  margin-bottom: 15px
+.aside-score__ul
+  list-style-image: url("../../images/check.png")
+  font-size: 16px
+  margin-left: 25px
+  margin-bottom: 15px
+  li
+    padding: 7px 0 7px 15px
+.colored-section
+  align-items: center
+  color: #FFF
+  display: flex
+  flex-direction: row
+  justify-content: space-between
+  margin: 64px 0 0
+  padding: 0 8.829%
+  position: relative
+  p
+    @extend .base-p
+  @include low-desktop
+    padding: 0
+  @include landscape-tablet
+    flex-direction: column
+  @include portrait-tablet
+    margin: 0  4.336%
+  @include mobile
+    margin-top: 0
+    margin-bottom: 0
+  &:before
+    content: ''
+    background-color: $cyan
+    position: absolute
+    width: 120vw
+    height: 100%
+    top: 0
+    left: 0
+    transform: translateX(-20vw)
+
+  article
+    position: relative
+    width: 43%
+    margin: 54px 39px
+    &:before
+      content: ''
+      position: absolute
+      top: 3px
+      left: -70px
+      background-image: url(../../images/question.png)
+      width: 48px
+      height: 74px
+      @include mobile
+        left: 2px
+    @include low-desktop
+      margin: 56px 39px 56px 69px
+    @include landscape-tablet
+      margin: 56px 39px 49px 85px
+      width: 88.5%
+      &:nth-child(2)
+        margin-top: 0
+    @include mobile
+      margin: 56px 27px 49px
+      &:nth-child(1)
+        margin-bottom: 46px
+.base-section
+  margin: 64px 0
+  padding: 0 8.829%
+  @include low-desktop
+    padding: 0
+  @include portrait-tablet
+    margin:  64px 4.336%
+  @include mobile
+    margin: 41px 27px
+  p
+    color: $lighten-font-color
+    @extend .base-p
+.comments__wrapper
+  background-color: #FFF
+
+.comments
+  min-height: 777px
+  width: 1015px
+  margin: 0 auto
+  padding: 48px 0 68px
+  @include mobile
+    width: 343px
+    padding: 41px 0
+
+footer
+  color: $lighten-font-color
+  background-color: $dark-blue
+  height: 201px
+  .thin-wrapper
+    display: flex
+    flex-direction: column
+    align-items: center
+.socials
+  display: flex
+  box-sizing: border-box
+  flex-direction: row
+  align-items: center
+  justify-content: space-between
+  height: 44px
+  margin: 40px 0 0
+  padding: 0 75px
+  width: 100%
+  @include low-desktop
+    padding: 0
+  @media screen and (max-width: 768px)
+    width: 205px
+    &>.line
+      display: none
+.social-item
+  flex-shrink: 0
+  width: 41px
+  height: 41px
+  border-radius: 21px
+  border: solid 1px rgba(255,255,255, .2)
+  margin: 0 10px
+  background: no-repeat center
+.twitter
+  margin-left: 17px
+.g-plus
+  margin-right: 17px
+.nav-anchors
+  display: flex
+  align-items: center
+  justify-content: space-between
+  width: 370px
+  margin: 27px 0
+  @include mobile
+    width: 300px
+  a
+    color: $lighten-font-color
+    text-decoration: none
+    text-transform: uppercase
+    font-weight: 600
+.line
+  height: 1px
+  background-color: rgba(255,255,255, .2)
+  width: 42%
