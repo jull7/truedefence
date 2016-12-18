@@ -1,12 +1,14 @@
 //FOR MEDIA QUERIES
 
 $wide-desktop-width: 1920px
+$af-low-desktop-width: 1800px
+$af-low-desktop-width: 1610px
 $low-desktop-width: 1600px
 $pr-low-desktop-width: 1280px
 $pr-laptop-landscape-width: 1150px
 $laptop-landscape-width: 1024px
 $laptop-width: 768px
-$middle-mobile: 660px
+$middle-mobile: 659px
 $mobile-width: 320px
 
 
@@ -14,8 +16,11 @@ $mobile-width: 320px
   @media screen and (min-width: #{$wide-desktop-width})
     @content
 
-@mixin low-desktop
+@mixin mx-low-desktop
   @media screen and (max-width: #{$low-desktop-width})
+    @content
+@mixin mn-low-desktop
+  @media screen and (min-width: #{$low-desktop-width + 1px})
     @content
 
 @mixin pre-low-desktop
@@ -30,12 +35,17 @@ $mobile-width: 320px
   @media screen and (min-width: #{$middle-mobile}) and (max-width: #{$laptop-width - 1px})
     @content
 
+@mixin to-tablet
+  @media screen and (max-width: #{$laptop-landscape-width})
+    @content
+
+
 @mixin landscape-tablet
   @media screen and (max-width: #{$laptop-landscape-width - 1px})
     @content
 
 @mixin pre-mobile
-  @media (min-width: #{$middle-mobile}) and (max-width: #{$laptop-width - 1px})
+  @media (min-width: #{$middle-mobile}) and (max-width: #{$laptop-width})
     @content
 
 @mixin mobile
@@ -52,8 +62,11 @@ $primary-font-color: #1b1d1e
 $lighten-font-color: #848687
 $accent-font-color: #35bef7
 
+$grey-section: #f3f6f8
+
 //GRADIENTS
 $main-gradient: linear-gradient(to right, rgb(76, 224, 144), rgb(72, 217, 81)), linear-gradient(rgb(71, 214, 117), rgb(71, 214, 117))
+$red-gradient: linear-gradient(to right, rgb(254, 61, 1), rgb(255, 96, 0)), linear-gradient(rgb(253, 109, 4), rgb(253, 109, 4))
 
 //SHADOWS
 $green-shadow: 0px 5px 20px 0 rgba(0, 231, 22, 0.4)
@@ -89,7 +102,29 @@ $montserrat: 'Montserrat', sans-serif
   position: relative
   width: 83.177%
   margin: 0 auto
-  @include low-desktop
+  &:before
+    content: ''
+    position: absolute
+    width: 120%
+    height: 100%
+    left: -10%
+    top: 0
+    background-color: #f9fcff
+    z-index: -1
+  .disclaimer
+    font-size: 13px
+    position: absolute
+    text-decoration: underline
+    color: #a2adb4
+    right: 0
+    top: 14px
+    &:hover
+      cursor: pointer
+    @include mn-low-desktop
+      right: 25.7%
+    @media screen and (max-width: #{$laptop-landscape-width - 1px} )
+      right: 24px
+  @include mx-low-desktop
     width: 91.328%
   @include portrait-tablet
     width: 100%
@@ -100,7 +135,7 @@ $montserrat: 'Montserrat', sans-serif
   position: relative
   width: 68.75%
   margin: 0 auto
-  @include low-desktop
+  @include mx-low-desktop
     width: 91.328%
 
 
@@ -108,17 +143,21 @@ $montserrat: 'Montserrat', sans-serif
   position: relative
   width: 82.342%
   margin: 0 auto
-  @include low-desktop
+  @include mx-low-desktop
     width: 100%
 
 .hamburger
   display: none
-  padding: 21px 24px 21px 0
+  margin: 23px 24px 23px 0
+  padding: 0
   @media screen and (max-width: #{$laptop-width})
     display: block
     &-box
       width: 35px
       height: 27px
+  //@media screen and (min-width: 660px)
+  //  padding-right: 32px
+
   @include mobile
     &-box
       width: 30px
@@ -143,6 +182,10 @@ h2,
   font-weight: 600
   @include mobile
     font-size: 22px
+h3
+  font-size: 18px
+  letter-spacing: .5px
+  font-weight: 600
 
 .base-p
   font-size: 18px
@@ -211,7 +254,7 @@ h2,
 // CUSTOM STYLES
 body
   @extend .base-font
-  background-color: #f9fcff
+  //background-color: #f9fcff
   color: $primary-font-color
   overflow-x: hidden
 .wrapper
@@ -226,26 +269,26 @@ header
 
 
 .logo
+  display: block
   position: absolute
   background-size: contain
   background: url(../../images/logo.png) no-repeat
+  box-sizing: border-box
   height: 39px
   width: 214px
   left: 32px
   top: 17px
   padding-left: 52px
   padding-top: 2px
+  font-size: 21px
+  font-weight: 700
+  text-transform: uppercase
+  color: #FFF
+  text-decoration: none
+  line-height: 22px
+
   @include mobile
     padding-left: 42px
-  a
-    display: block
-    height: 39px
-    font-size: 21px
-    font-weight: 700
-    text-transform: uppercase
-    color: #FFF
-    text-decoration: none
-    line-height: 22px
 
   .logo--sm
     display: block
@@ -253,8 +296,9 @@ header
     color: $lighten-font-color
     font-size: 11px
     font-weight: 300
+    line-height: 14px
   @media screen and (max-width: 400px)
-    left: 12px
+    left: 24px
 .main-nav
   display: block
   @media screen and (max-width: #{$laptop-width})
@@ -300,12 +344,11 @@ header
   text-align: center
   padding-top: 70px
   color: #FFF
-  @include low-desktop
+  @include mx-low-desktop
     padding-top: 49px
   @include landscape-tablet
     height: 320px
-    padding-top: 70px
-  @media only screen and (max-width: 855px)
+  @media only screen and (max-width: 550px)
     padding-top: 42px
   .h1-like
     font-weight: bold
@@ -322,7 +365,8 @@ header
     content: ''
     position: absolute
     background: url(../../images/charts.png) no-repeat
-    background-size: cover
+    //background-size: cover
+    background-size: 100% 100%
     width: 100%
     height: 249px
     top: 0
@@ -338,8 +382,10 @@ header
 .head-p
   font-weight: 600
   position: relative
-  @include low-desktop
+  @include mx-low-desktop
     margin: 16px 54px
+  @include mn-low-desktop
+    margin: 16px 20px
   &.base-p
     @include portrait-tablet
       line-height: 22px
@@ -347,6 +393,8 @@ header
     font-size: 14px
     line-height: 20px
     margin: 10px
+  @media screen and (min-width: #{$low-desktop-width})
+    margin: 16px 180px
 main
   position: relative
   float: left
@@ -354,24 +402,17 @@ main
   margin-top: 41px
   margin-right: 32px
   background-color: #FFF
-  border: solid 1px #dfdfdf
-  @include low-desktop
+  @include mx-low-desktop
     width: 100%
     margin-right: 0
+  @include landscape-tablet
+    //margin-bottom: 64px
 
-.disclaimer
-  font-size: 13px
-  position: absolute
-  text-decoration: underline
-  color: #262829
-  right: 0
-  top: -28px
-  &:hover
-    cursor: pointer
 
 // table
 .table
   position: relative
+  border: solid 1px #dfdfdf
 .table-head-row
   align-items: center
   display: flex
@@ -410,18 +451,13 @@ main
   width: 100%
   height: 213px
   border-bottom: 1px solid #dfdfdf
-  //&:first-child
-  //  &:before
-  //    content: ''
-  //    @extend .editors-pick__mark
   @include landscape-tablet
     min-height: 256px
     flex-wrap: wrap
     padding-bottom: 20px
     &:nth-child(odd)
       background-color: #f8fcff
-    &:last-child
-      margin-bottom: 64px
+
   @include mobile
     height: inherit
     &:last-child
@@ -473,9 +509,7 @@ main
     flex-basis: 60%
     margin-left: 0
     margin-bottom: 24px
-.site__logo
-  background-repeat: no-repeat
-  background-size: 191px
+
 .site__rating
   @include mobile
     display: inline-block
@@ -491,6 +525,7 @@ main
   letter-spacing: 0.5px
   text-transform: uppercase
   color: $lighten-font-color
+
   @include mobile
     position: absolute
     bottom: 4px
@@ -523,8 +558,8 @@ main
   letter-spacing: 0.4px
   text-transform: uppercase
   color: $accent-font-color
-  &:hover
-    cursor: pointer
+  text-decoration: none
+
 .description
   width: 27.037%
   text-align: left
@@ -632,6 +667,7 @@ main
   box-shadow: $green-shadow
   text-decoration: none
   text-transform: uppercase
+  text-align: center
   font-weight: 600
   flex-shrink: 0
   flex-grow: 0
@@ -640,6 +676,7 @@ main
     margin: 0 auto 26px
   &:hover
     opacity: .9
+    cursor: pointer
   &:after
     content: '›'
     height: 13px
@@ -650,9 +687,10 @@ main
     color: #FFF
 
 .side-block
+  position: relative
   float: left
   width: calc(100% - 74.44% - 32px)
-  @include low-desktop
+  @include mx-low-desktop
     display: flex
     float: none
     clear: both
@@ -669,13 +707,14 @@ main
     flex-wrap: wrap
 
   aside
+    position: relative
     background-color: #FFF
     border: solid 1px #dfdfdf
     box-sizing: border-box
     margin-top: 41px
     padding: 0 23px
     width: 100%
-    @include low-desktop
+    @include mx-low-desktop
       width: 470px
       min-height: 335px
       margin-top: 0
@@ -694,7 +733,7 @@ main
 
 
 .how-score
-  @include low-desktop
+  @include mx-low-desktop
     min-height: 335px
 .aside__title
   font-size: 17px
@@ -743,7 +782,7 @@ main
   position: relative
   p
     @extend .base-p
-  @include low-desktop
+  @include mx-low-desktop
     padding: 0
   @include landscape-tablet
     flex-direction: column
@@ -776,7 +815,7 @@ main
       height: 74px
       @include mobile
         left: 2px
-    @include low-desktop
+    @include mx-low-desktop
       margin: 56px 39px 56px 69px
     @include landscape-tablet
       margin: 56px 39px 49px 85px
@@ -790,7 +829,7 @@ main
 .base-section
   margin: 64px 0
   padding: 0 8.829%
-  @include low-desktop
+  @include mx-low-desktop
     padding: 0
   @include portrait-tablet
     margin:  64px 4.336%
@@ -815,6 +854,7 @@ footer
   color: $lighten-font-color
   background-color: $dark-blue
   height: 201px
+  margin-top: 30px
   .thin-wrapper
     display: flex
     flex-direction: column
@@ -829,7 +869,7 @@ footer
   margin: 40px 0 0
   padding: 0 75px
   width: 100%
-  @include low-desktop
+  @include mx-low-desktop
     padding: 0
   @media screen and (max-width: 768px)
     width: 205px
@@ -864,3 +904,478 @@ footer
   height: 1px
   background-color: rgba(255,255,255, .2)
   width: 42%
+.copyright
+  @include mobile
+    text-align: center
+    font-size: 12px
+
+  //SECOND PAGE
+.head-info-thin
+  box-sizing: border-box
+  height: 139px
+  position: relative
+  padding: 40px 13.958% 0
+  color: #FFF
+  @media screen and (min-width: #{$pr-low-desktop-width}) and (max-width: #{$af-low-desktop-width})
+    //padding-left: calc((100% - 770px + 370px + 31px)/2)
+  //padding-right: calc((100% - (770px + 370px + 31px))/2)
+  @include mx-low-desktop
+    padding-left: 54px
+    padding-right: 54px
+  @media screen and (max-width: #{$laptop-landscape-width - 1px})
+    padding-left: 32px
+    padding-right: 32px
+  .h1-like
+    font-weight: bold
+    position: relative
+    font-size: 28px
+    letter-spacing: .6px
+    @include mobile
+      text-align: center
+  &::before
+    content: ''
+    position: absolute
+    background: url(../../images/charts.png) no-repeat
+    background-position: center
+    background-size: 100% 100%
+    width: 100%
+    height: 139px
+    top: 0
+    left: 0
+    @include mobile
+      height: 128px
+  @include wide-desktop
+    &::before
+      background-size: cover
+  @include mobile
+    height: 128px
+    padding: 36.5px 45px 0
+    &::before
+      height: 128px
+.back-reviews_btn
+  display: inline-block
+  position: relative
+  font-size: 13px
+  letter-spacing: .5px
+  color: $accent-font-color
+  text-transform: uppercase
+  font-weight: 600
+  margin-bottom: 5px
+  padding-left: 18px
+  text-decoration: none
+  &:before
+    content: ''
+    position: absolute
+    left: 0
+    top: 1px
+    background: url(../../images/arrow-left.png) no-repeat
+    background-size: contain
+    width: 12px
+    height: 14px
+  &:hover
+    cursor: pointer
+  @include mobile
+    display: none
+.s-wide-wrapper
+  position: relative
+  width: calc(100% - 13.958% * 2)
+  margin: 0 auto
+  .disclaimer
+    font-size: 13px
+    position: absolute
+    text-decoration: underline
+    color: #a2adb4
+    right: 0
+    top: 14px
+    &:hover
+      cursor: pointer
+    @media screen and (max-width: #{$middle-mobile} )
+      right: 21px
+  @media screen and (min-width: #{$pr-low-desktop-width}) and (max-width: #{$af-low-desktop-width})
+    width: calc(770px + 370px + 31px)
+  @media screen and (max-width: #{$pr-low-desktop-width - 1px})
+    width: calc(100% - 108px)
+  @media screen and (max-width: #{$laptop-landscape-width - 1px})
+    width: calc(100% - 64px)
+  @media screen and (max-width: 659px)
+    width: 100%
+    margin: 0
+    padding: 0 21px
+    box-sizing: border-box
+
+    .side-block
+      width: 100%
+  .side-block
+    float: left
+    width: 26.948%
+    @media screen and (min-width: #{$pr-low-desktop-width}) and (max-width: #{$af-low-desktop-width})
+      width: 370px
+      clear: none
+      flex-wrap: wrap
+      padding: 0
+    @media screen and (max-width: #{$pr-low-desktop-width - 1px})
+      width: 100%
+      float: none
+      display: flex
+      flex-direction: column
+      align-items: center
+
+    aside
+      //@include mobile
+      //  width: 100%
+      //  border-bottom: none
+      //  border-right: none
+      //  border-left: none
+      //  padding: 0
+      @media screen and (min-width: #{$pr-low-desktop-width}) and (max-width: #{$af-low-desktop-width})
+        width: 370px
+        min-height: inherit
+      .aside__title
+        text-align: center
+        @include mobile
+          text-align: left
+      &:first-child
+        margin-top: 41px
+        @media screen and (min-width: 660px) and (max-width: #{$pr-low-desktop-width - 1px})
+          margin-top: 41px
+          margin-bottom: 41px
+          padding-left: 0
+          padding-right: 0
+        @media screen and (max-width: 500px)
+          margin: 0
+          width: 100%
+        @media screen and (min-width: 400px) and (max-width: 659px)
+          border-top: solid 1px #dfdfdf
+        @media screen and (max-width: 399px)
+          width: 100%
+          border-bottom: none
+          border-right: none
+          border-left: none
+          padding: 0
+      &:nth-child(2)
+        @media screen and (max-width: #{$pr-low-desktop-width - 1px})
+          min-height: inherit
+          width: 800px
+          border-left: none
+          border-right: none
+          border-bottom: none
+        @media screen and (max-width: 855px)
+          width: 670px
+        @media screen and (max-width: 659px)
+          width: 100%
+          border-bottom: none
+          border-right: none
+          border-left: none
+          padding: 0
+      @media screen and (max-width: #{$pr-low-desktop-width - 1px})
+        width: 370px
+        flex-shrink: 0
+        flex-grow: 0
+
+.top-items
+  .aside__title
+    flex-basis: 100%
+    justify-content: space-around
+    @media screen and (max-width: 659px)
+      text-align: left !important
+    @media screen and (min-width: 660px) and (max-width: #{$pr-low-desktop-width - 1px})
+      border-bottom: none
+      //margin-top: 48px
+      padding: 48px 0
+      height: 16px
+  @include mx-low-desktop
+    display: flex
+    flex-wrap: wrap
+.top-item
+  .score__review
+    display: none
+  @include mobile
+    .score__value > span
+      font-size: 12px
+    &:last-child
+      border-bottom: none
+  @media screen and (min-width: 660px) and (max-width: #{$pr-low-desktop-width - 1px})
+    flex-basis: 25%
+    flex-direction: column
+    flex-wrap: wrap
+    align-content: center
+    justify-content: space-around
+    height: 112px !important
+    border-bottom: none !important
+    .score__review
+      display: block
+    &.hide-sm
+      display: none
+    .hide-param
+      display: none
+  @media screen and (max-width: 659px)
+    a
+      margin: 0
+.s-main
+  float: left
+  width: calc(100% - 39.5px - 26.948%)
+  margin-top: 41px
+  margin-right: 37.5px
+  @media screen and (min-width: #{$pr-low-desktop-width}) and (max-width: #{$af-low-desktop-width})
+    width: 770px
+    margin-right: 31px
+  @media screen and (max-width: #{$pr-low-desktop-width - 1px})
+    width: 100%
+    margin-right: 0
+  &>div>ul
+    list-style: inherit
+    margin-left: 97px
+    @extend .grey__p
+    @include mobile
+      margin-left: 47px
+  &>section
+    display: flex
+    flex-basis: 100%
+    align-items: center
+    flex-direction: column
+    justify-content: center
+    padding: 32px 0
+    box-sizing: border-box
+    background-color: #f2f6f9
+    margin: 37px 0 40px 0 !important
+    &>h2
+      @include mobile
+        text-align: center
+
+    a
+      margin-top: 14px
+      @include mobile
+        width: 278px
+        margin-left: 0
+        margin-right: 0
+        padding: 0
+    @include mobile
+      background-color: transparent
+      //text-align: center
+      &:before
+        content: ''
+        position: absolute
+        width: 120%
+        height: 100%
+        top: 0
+        left: -10%
+        z-index: -1
+        background-color: #f2f6f9
+  p
+    @extend .grey__p
+    //margin: 10px 25px
+    @include mobile
+      font-size: 16px
+      letter-spacing: .3px
+      line-height: 24px
+  section
+    position: relative
+    margin: 30px 0 0
+    background-color: #f2f6f9
+    padding: 16px 30px
+    @media screen and (max-width: 659px)
+      padding: 16px 0
+    h2
+      @include mobile
+        font-size: 24px
+    h6
+      font-size: 14px
+      font-family: $open-sans
+      letter-spacing: .8px
+      color: #6a7c87
+      text-transform: uppercase
+      margin-bottom: 8px
+
+.grey__p
+  @extend .base-p
+  color: #848687
+  @media screen and (max-width: 768px)
+    font-size: 16px
+.full-info-block
+  box-sizing: border-box
+  padding: 0 24px
+  border: solid 1px #dfdfdf
+  &>section
+    padding: 16px 20px
+    @include mobile
+      padding: 19px 20px 31px
+    ul
+      position: relative
+      flex-wrap: wrap
+      display: flex
+      list-style-image: url("../../images/check.png")
+      justify-content: space-between
+      &>li
+        //display: inline-flex
+        font-size: 15px
+        color: #1b1d1e
+        line-height: 24px
+        letter-spacing: .3px
+        margin-left: 21px
+        padding-left: 5px
+        flex-basis: 46%
+        &:nth-child(odd)
+          float: right
+        @media screen and (max-width: $pr-low-desktop-width)
+          line-height: 22px
+        @media screen and (max-width: $laptop-width)
+          line-height: 20px
+        @media screen and (min-width: $laptop-width) and (max-width: 890px)
+          flex-basis: 44%
+        //@media screen and (max-width: 778px) and (max-width: 890px)
+        //  flex-basis: 45%
+        @media screen and (max-width: $laptop-width - 1px)
+          line-height: 20px
+          flex-basis: 100%
+          margin-bottom: 12px
+  div
+    &:first-child
+      @include mobile
+        text-align: center
+      img
+        float: left
+        margin-top: 23px
+        @include mobile
+          float: none
+    &:last-child
+      display: flex
+      align-items: center
+      justify-content: space-between
+      @include mobile
+        flex-wrap: wrap
+      p
+        position: relative
+        font-size: 16px
+        font-weight: 700
+        letter-spacing: 0.3px
+        padding: 16px 0 16px 43px
+        color: #000
+        width: 73%
+        @include mobile
+          line-height: 22px
+          width: 100%
+        &:before
+          position: absolute
+          content: ''
+          width: 24px
+          height: 24px
+          background-image: url(../../images/info.png)
+          left: 5px
+          top: 50%
+          transform: translateY(-50%)
+      a
+        @extend .visit-button
+        width: 177px
+        font-size: 17px
+        padding: 0 33px 0 35px
+        //margin-left: 47px
+        @include mobile
+          //width: 272px
+          width: 228px
+          padding: 0
+          margin-top: 0
+          margin-left: auto
+          margin-right: auto
+    &+p
+      display: block
+      margin-left: 220px
+      margin-right: 32px
+      @include mobile
+        margin: 31px 0 0 0
+  p
+    @extend .grey__p
+.plain-text-block
+  p
+    @extend .grey__p
+  hr
+    border: 0
+    border-top: 1px solid rgb(223, 223, 223)
+    display: block
+    height: 1px
+    margin: 29px 0 31px
+
+
+.featured-item
+  height: 300px
+  display: flex
+  flex-wrap: wrap
+  flex-grow: 0
+  flex-shrink: 0
+  justify-content: center
+  align-items: center
+  text-align: center
+  .product__logo
+    flex-basis: 100%
+.buy-product__btn
+  width: 262px
+  height: 52px
+  border-radius: 6px
+  background-color: #fd6d04
+  font-size: 18px
+  color: #FFF
+  letter-spacing: 1.1px
+  text-align: center
+  font-weight: 600
+  text-transform: uppercase
+  line-height: 52px
+  flex-basis: inherit
+  &:hover
+    cursor: pointer
+    opacity: .8
+.top-item
+  display: flex
+  align-items: center
+  justify-content: space-between
+  height: 80px
+  border-bottom: solid 1px #dfdfdf
+  width: 100%
+  .score__value
+    font-size: 24px
+    line-height: 24px
+    text-align: center
+    >span
+      display: block
+      color: rgb(131, 135, 148)
+      //display: none
+      font-size: 13px
+      letter-spacing: .3px
+      font-weight: 400
+      line-height: normal
+    text-transform: capitalize
+.product__rating
+  flex-basis: 100%
+  text-align: center
+  margin-bottom: 32px
+.product__price
+  font-size: 30px
+  font-weight: 700
+  letter-spacing: 0.6px
+  flex-basis: 100%
+  text-align: center
+  @include landscape-tablet
+    width: 27%
+    align-self: flex-start
+    margin-top: 38px
+  @include pre-mobile
+    width: 22%
+  @include mobile
+    flex-basis: 100%
+    margin-top: 0
+.top-site
+  width: 111px
+  height: 42px
+  background-size: 100%
+  background-repeat: no-repeat
+  background-position: center
+
+.visit-button--sm
+  @extend .visit-button
+  font-size: 13px
+  height: 36px
+  line-height: 36px
+  padding: 0 11px
+  width: 93px
+  &:after
+    display: none
+
+//Media for mobiles

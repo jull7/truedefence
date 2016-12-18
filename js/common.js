@@ -4,7 +4,8 @@ $(document).ready(function () {
         emptyColor: '#dfdfdf',
         starSize: 18,
         useGradient: false,
-        readOnly: true
+        hoverColor: '#ff7f30'
+        // readOnly: true
     });
 
     $('.js-open-sibling').on('click', function () {
