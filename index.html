@@ -36,7 +36,13 @@
             architecto. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
     </div>
     <div class="wide-wrapper">
-        <div class="disclaimer">Advertisers disclaimer</div>
+        <div class="disclaimer js-open-popup">
+            Advertisers disclaimer
+            <div class="disclaimer-popup">
+                Disclaimer: Our top ranked sites are reviewed on the basis of our own views, knowledge and expert opinions. We are able to provide you with our free online comparison tool thanks to referral fees we receive from a number of companies that are compared and reviewed on our website. We do not review all products in a given category. We are independently owned and operated and all opinions expressed on this site are our own.
+            </div>
+            <div class="arrow"></div>
+        </div>
         <main>
             <div class="table">
                 <div class="table-head-row">
@@ -245,9 +251,7 @@
                     <li>Product features</li>
                     <li>Product features</li>
                     <li>Product features</li>
-                    <li>Product features</li>
-                    <li>Product features</li>
-                    <li>Product features</li>
+
                 </ul>
             </aside>
         </div>
@@ -289,7 +293,28 @@
         </section>
     </div>
     <div class="comments__wrapper">
-        <div class="comments"></div>
+        <div class="comments">
+            <div id="disqus_thread"></div>
+            <script>
+
+                /**
+                 *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                 *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+                /*
+                 var disqus_config = function () {
+                 this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+                 this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                 };
+                 */
+                (function() { // DON'T EDIT BELOW THIS LINE
+                    var d = document, s = d.createElement('script');
+                    s.src = '//truedefense-1.disqus.com/embed.js';
+                    s.setAttribute('data-timestamp', +new Date());
+                    (d.head || d.body).appendChild(s);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        </div>
 
     </div>
 

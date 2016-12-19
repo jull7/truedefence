@@ -28,4 +28,9 @@ $(document).ready(function () {
         $(this).toggleClass('is-active');
         $('.main-nav').slideToggle();
     });
+
+    $('.js-open-popup').on('click', function () {
+       $('.disclaimer>div').toggle();
+
+    });
 });
