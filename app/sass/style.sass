@@ -76,7 +76,6 @@ $open-sans: 'Open Sans', sans-serif
 $montserrat: 'Montserrat', sans-serif
 
 
-
 //SIMPLE GRID
 .col-2
   float: left
@@ -202,6 +201,11 @@ $montserrat: 'Montserrat', sans-serif
   width: 35px
   @include mobile
     width: 30px
+
+strong,
+b
+  letter-spacing: .5px
+  font-weight: 600
 
 h1,
 .h1-like
@@ -391,7 +395,7 @@ header
     padding-top: 42px
   .h1-like
     font-weight: bold
-    margin: 0 27px 16px
+    margin: 0 27px 12px
     position: relative
     @include landscape-tablet
       line-height: 52px
@@ -422,9 +426,9 @@ header
   font-weight: 600
   position: relative
   @include mx-low-desktop
-    margin: 16px 54px
+    margin: 12px 54px
   @include mn-low-desktop
-    margin: 16px 20px
+    margin: 12px 20px
   &.base-p
     @include portrait-tablet
       line-height: 22px
@@ -432,8 +436,6 @@ header
     font-size: 14px
     line-height: 20px
     margin: 10px 21px
-  @media screen and (min-width: #{$low-desktop-width})
-    margin: 16px 180px
 main
   position: relative
   float: left
@@ -444,9 +446,6 @@ main
   @include mx-low-desktop
     width: 100%
     margin-right: 0
-  @include landscape-tablet
-    //margin-bottom: 64px
-
 
 // table
 .table
@@ -948,7 +947,7 @@ footer
 .nav-anchors
   display: flex
   align-items: center
-  justify-content: space-between
+  justify-content: center
   width: 370px
   margin: 27px 0
   @include mobile
@@ -961,7 +960,7 @@ footer
 .line
   height: 1px
   background-color: rgba(255,255,255, .2)
-  width: 42%
+  width: 100%
 .copyright
   @include mobile
     text-align: center
@@ -1168,7 +1167,7 @@ footer
   &>div>ul
     list-style: inherit
     margin-left: 97px
-    @extend .grey__p
+    @extend .base-p
     @include mobile
       margin-left: 47px
   &>section
@@ -1185,14 +1184,6 @@ footer
       @include mobile
         text-align: center
 
-    a
-      @extend .visit-button
-      margin-top: 14px
-      @include mobile
-        width: 278px
-        margin-left: 0
-        margin-right: 0
-        padding: 0
     @include mobile
       background-color: transparent
       &:before
@@ -1205,7 +1196,7 @@ footer
         z-index: -1
         background-color: #f2f6f9
   p
-    @extend .grey__p
+    @extend .base-p
     @include mobile
       font-size: 16px
       letter-spacing: .3px
@@ -1317,25 +1308,33 @@ footer
           margin-right: auto
     &+p
       display: block
-      margin-left: 220px
       margin-right: 32px
+      margin-left: 220px
       min-height: 76px
       @include mobile
         margin: 31px 0 0 0
         min-height: 0
-  p
-    @extend .grey__p
 .plain-text-block
   margin-top: 30px
-  p
-    @extend .grey__p
   hr
     border: 0
     border-top: 1px solid rgb(223, 223, 223)
     display: block
     height: 1px
     margin: 29px 0 31px
-
+  &>section
+    &>h2
+      text-align: center
+    p
+      &>a
+        @extend .buy-product__btn
+        display: block
+        margin: 0 auto
+        @include mobile
+          width: 278px
+          margin-left: 0
+          margin-right: 0
+          padding: 0
 .featured-prod
   .aside__title
     @media screen and (min-width: 660px) and (max-width: #{$pr-low-desktop-width - 1px})
